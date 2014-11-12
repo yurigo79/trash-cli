@@ -8,7 +8,7 @@ import logging
 from .fstab import Fstab
 
 logger=logging.getLogger('trashcli.trash')
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
 # Error codes (from os on *nix, hard coded for Windows):
@@ -491,7 +491,8 @@ class IfDate:
 class OlderThan:
     def __init__(self, days_ago, now):
         from datetime import timedelta
-        self.limit_date = now() - timedelta(days=days_ago)
+        self.limit_date = now() - timedelta(hours=days_ago)
+        logger.debug("Deleting older than %s" % self.limit_date)
     def __call__(self, deletion_date):
         return deletion_date < self.limit_date
 

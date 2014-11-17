@@ -389,6 +389,7 @@ class TrashDirs:
         self._for_each_volume_trashcan()
     def emit_home_trashcan(self):
         def return_result_with_volume(trashcan_path):
+            logger.debug("Cleaning trash dir %s" %trashcan_path)
             self.on_trash_dir_found(trashcan_path, '/')
         self.home_trashcan.path_to(return_result_with_volume)
     def _for_each_volume_trashcan(self):
